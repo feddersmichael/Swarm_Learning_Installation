@@ -40,32 +40,45 @@ We will go through both of them separately.
 
 ### Installing APLS as a container
 
-#### Docker Engine
-docker engine mit
-https://docs.docker.com/engine/install/centos/ with --allowerasing  
+To run the APLS Container we first need to install a docker environment. In principle there are two option:
+- [Docker Engine](https://docs.docker.com/engine/)  
+or
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+
+[comment]: # (rpm package from https://docs.docker.com/desktop/install/fedora/ sudo dnf install gtk3-devel  https://docs.fedoraproject.org/en-US/epel/ https://www.redhat.com/en/blog/whats-epel-and-how-do-i-use-it)
+
+However, with this build on RHEL 8 we run into the problem that Docker Desktop depends on the 'libc.so.6(GLIBC_2.34)(64bit)' package which is only available under RHEL 9. For more background see [here](https://access.redhat.com/solutions/38634) (official) or [here](https://stackoverflow.com/q/40798938) (unofficial). We will therefore stick to Docker Engine.
+
+#### Installing Docker Engine
+
+We first need to install docker engine. We can follow the instructions for CentOS [here](https://docs.docker.com/engine/install/centos/#install-using-the-repository). First we need to install a dependency:
+
+    $ sudo yum install -y yum-utils
+
+Then we can install Docker Engine.
+
+    $ sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+>In my installation this step only ran through after adding --allowerasing to the code, so in total using  
+ `$ sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo --allowerasing`
+
+After this command docker engine should be installed and ready to use. We can start it with the following command:
+
+    $ sudo systemctl start docker
+
+
+Optionally we can test that our installation was successfull by running the 'hello-world' container:
+
+    $ sudo docker run hello-world
+
+#### Pulling and starting APLS container
 
 We can then follow all the "docker" commands as in the instruction. Be aware that we need either root access or have to use *sudo* before every docker command.
 
 After having started the docker container we can access the web site through  
 https://localhost:5814/autopass
 
-#### Docker Desktop
-rpm package from 
-https://docs.docker.com/desktop/install/fedora/  
-
-gtk3-devel is needed by docker-desktop-4.25.1-128006.x86_64  
-sudo dnf install gtk3-devel  
-libc.so.6(GLIBC_2.32)(64bit) is needed by docker-desktop-4.25.1-128006.x86_64  
-libc.so.6(GLIBC_2.34)(64bit) is needed by docker-desktop-4.25.1-128006.x86_64  
-Might be connected with general support.  
-official https://access.redhat.com/solutions/38634  
-and inofficial https://stackoverflow.com/q/40798938  
-pass is needed by docker-desktop-4.25.1-128006.x86_64  
-pass we can download from the "epel" repository. It is not installed by default but has to be activated.  
-The instructions are here https://docs.fedoraproject.org/en-US/epel/  
-Some general information is here https://www.redhat.com/en/blog/whats-epel-and-how-do-i-use-it  
-keep in mind that the installation there is for RHEL 9
-qemu-system-x86 >= 5.2.0 is needed by docker-desktop-4.25.1-128006.x86_64
+>This is in contrast to the advice in the githup repo where it says to use https://localhost:5814
 
 ### Installing APLS as a software
 
