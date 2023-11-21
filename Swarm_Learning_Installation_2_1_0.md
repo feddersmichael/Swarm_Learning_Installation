@@ -1,5 +1,5 @@
 
-# Swarm Learning 2.1.0 Installation (Version from 15.11.23)
+# Swarm Learning 2.1.0 Installation (Version from 21.11.23)
 
 ## Overview
 
@@ -79,7 +79,7 @@ Optionally we can test that our installation was successfull by running the 'hel
 
 #### Pulling and starting APLS container
 
-The rest of the steps we follow the [official document](pdf/HPEAutoPassLicenseServerDockerIntegration.pdf) about the Docker integration. This is very similar to the documentation on github, however it includes some extra information and check-ups. 
+The rest of the steps we follow the [official document](pdf/HPEAutoPassLicenseServerDockerIntegration.pdf) about the Docker integration (Version from 21.11.23, the newest version will be available when downloading APLS and its documents from HPE [here](#installing-apls-as-a-software)). This is very similar to the documentation on github, however it includes some extra information and check-ups. 
 1. Login to the HPE docker registry using your HPE Passport email id and password ‘hpe_eval’ :
 
         $ docker login hub.myenterpriselicense.hpe.com -u <HPE-PASSPORT-EMAIL-ID> -p hpe_eval
@@ -156,11 +156,11 @@ TODO: change picture size
 
 
 
-2. We can access the software under *get-license*. ![APLS_search](images/Screenshot%20from%202023-11-20%2017-06-34.png)
+2. We can access the software under *get-license*. We choose the version under the category *Free Software*. ![APLS_search](images/Screenshot%20from%202023-11-20%2017-06-34.png)
 
 3. We have to agree to the license and can select all files to donload. ![APLS-download](images/Screenshot%20from%202023-11-20%2017-06-12.png)
 
-2. After downloading the zip files the installation steps are described in the document [HPE AutoPass License Server User Guide.pdf](pdf/HPE%20AutoPass%20License%20Server%20User%20Guide.pdf) under the section *Installation and Setup*. This involves mainly executing the UNIX/setup.bin file in a standard installation procedure.
+2. After downloading the zip files the installation steps are described in the document [HPE AutoPass License Server User Guide.pdf](pdf/HPE%20AutoPass%20License%20Server%20User%20Guide.pdf) under the section *Installation and Setup* (local version from 21.11.23, newest version is part of the downloaded documents zip file). This involves mainly executing the UNIX/setup.bin file in a standard installation procedure.
 
 We start by opening the terminal and moving into the folder where the setup.bin file is saved. Then we can start the installation with the command
 
@@ -168,31 +168,32 @@ We start by opening the terminal and moving into the folder where the setup.bin 
 
 > If we want to change the default installation folder we can do this with the installer.properties file which has to be in the same folder as setup.bin .
 
-## Gain the Lock Code and download SLM-UI
+## Gain the Lock Code
 
-After having started the docker container we can access the web site through  
-https://localhost:5814/autopass
+The following steps can also be found in the [HPE AutoPass License Server User Guide](pdf/HPE%20AutoPass%20License%20Server%20User%20Guide.pdf) under the section *HPE AutoPass License Server Setup and Start*.
+
+1. After having started the docker container we can access the web site through https://localhost:5814/autopass . Instead of 'localhost' we can also use the ip addres or the Host Name.
 
 >This is in contrast to the advice in the githup repo where it says to use https://localhost:5814
-
-To access the Lock Code we have to access the AutoPass Web Server. The steps are again listed in the *HPE AutoPass License Server User Guide.pdf* under the section *HPE AutoPass License Server Setup and Start*. I will receite them here:
-
-1. After installing APLS succesfully we can open it by accessing it over the port 5814  Specifically we need to enter he server's Web address into our browser which is:  
-https://< ip address or Host Name >:5814/autopass  
-Hereby we need to replace ip-adress or Host Name with the respective name on the users account and also remove the < >
     
-2. We can then log in by using
+2. We can then log in the first time by using the default combination of
     - **User name**: admin
     - **password**: password  
     The system will then ask to create a new user password combination which can be chosen freely.
 
-3. Under the tab *License Management* and the subtab *Install License* we find the **Lock Code**.
+> It is very important to take care of the password credentials *especially* if APLS is installed as a Docker Container. If they get lost and you installed APLS as a software uninstalling should reset everything **which includes assigned licenses**. If APLS was installed as a Container **I didn't find a way to reset the username/password** so it is very advised to act cautiously.
 
-We can now continue with downlaoding the SLM-UI
+3. Under the tab *License Management* and the subtab *Install License* we find the **Lock Code**. ![Lock Code](images/Screenshot%20from%202023-11-21%2012-37-27.png)
 
-1. We can access the [HPE Software page](https://myenterpriselicense.hpe.com/cwp-ui/software) and search for *Swarm Learning*. Click **Software** (left panel) -> Under **Search** Select "Product Info" -> enter the string "Swarm Learning". Under the search results, For the product "HPE-SWARM-CMT 2.0.0"-> Click on **Action** -> **Get License**
+## Download SLM-UI
 
-2. We can activate our license with the Lock Code and then download all available files (the installation files for Windows and MacOS can be omitted).
+Now we can retrieve Swarm Learning from the HPE Software Center.
+
+1. We access the [HPE Software page](https://myenterpriselicense.hpe.com/cwp-ui/software) and search for *Swarm Learning*. ![Swarm Learning Search](images/Screenshot%20from%202023-11-21%2012-53-02.png) Here we need to select the option *Get License*.
+
+2. In the next step we need to activate our License. *HPE Serial Number* refers to the Lock Code we looked up in the previous step. ![Activate Swarm Learning](images/Screenshot%20from%202023-11-21%2012-56-45.png)
+
+3. Finally after accepting the license we can download Swarm Learning. For our purposes we don't need the installation for Windows or Mac. ![Download Swarm Learning](images/Screenshot%20from%202023-11-21%2013-03-25.png)
 
 ## Install swarm learning on the host with the SLM-UI
 
