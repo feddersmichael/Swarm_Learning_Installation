@@ -140,7 +140,7 @@ If we want to install APLS as a software directly on the host we can follow thes
 
 
 
-TODO: change picture size
+TODO: change picture size and name
 
 
 
@@ -187,6 +187,8 @@ The following steps can also be found in the [HPE AutoPass License Server User G
 
 ## Download SLM-UI
 
+>The github page follows the process from a purchased software point of view which is not relevant for us. For comparison you can find it [here](https://github.com/HewlettPackard/swarm-learning/blob/master/docs/Install/Installing_HPE_Swarm_Learning_Management_UI(SLM-UI).md).
+
 Now we can retrieve Swarm Learning from the HPE Software Center.
 
 1. We access the [HPE Software page](https://myenterpriselicense.hpe.com/cwp-ui/software) and search for *Swarm Learning*. ![Swarm Learning Search](images/Screenshot%20from%202023-11-21%2012-53-02.png) Here we need to select the option *Get License*.
@@ -197,14 +199,34 @@ Now we can retrieve Swarm Learning from the HPE Software Center.
 
 ## Install swarm learning on the host with the SLM-UI
 
-- Now we need to install the licenses. We can just follow the steps as we did to look up the Lock Code. The file we need to uplaod has the ending .dat . We then just follow the shown steps.
+### Install Licenses on APLS
+
+Now we need to install the licenses for Swarm Learning. 
+
+1. We access the [APLS Web-Ui](https://localhost:5814/autopass)
+
+2. We navigate to *License Management* and then *Install Liceense*. ![Navigate Install License](images/Screenshot%20from%202023-11-21%2013-15-21.png)
+
+3. Here we need to select the license file which we just downloaded at step 3. [here](#download-slm-ui) which has a .dat file type.
+
+4. Select all possible products and continue with *Install Licenses*. ![Install Licenses](images/Screenshot%20from%202023-11-21%2013-17-54.png)
+
+You should get a green message containing *License(s) added successfully*.
+
+### Install SLM-Ui
 
 Afterwards we can install the SLM-UI.
 
-1. The first thing to fill out is at step 3. *Docker Registry*. Hereby the **HPE Passport Username** is the User ID / Email Adress which we use to login at the HPE Software portal.
+1. To install SLM-UI we need to execute *HPE_SWARM_LEARNING_INSTALLER_LINUX*.
 
-2. At step 5. *Install SLM-UI* we need to specify our IP adress which we get from the terminal by using the comman *ip a* and choosing the currently used internet connection. We also need to check the ssh port, this is possible for example with *sudo netstat -lntp*. Here we find the port under the PID *1239/sshd* and then check the local adress in the same row. Finally we have to fill out *Username* and *Password*. With this the program refers to the login data of the current logged in user of the RHEL OS.
+>Don't forget to check *Allow executing file as a program* under *Permissions* at the file properties.
+
+2. The first two steps repeat the introuction and Hardware Requirements. At step 3 we need to fill in the *HPE Passport Username* which is the E-Mail we used to sign up for HPE Software Center. ![Step 3](images/Screenshot%20from%202023-11-21%2013-23-29.png)
+
+3. If we use the standard Database Settings the next relevant step for us is step 5 *Install SLM-UI*. As this is the first installation we don't need to check the *Upgrade* button. We can find our ip adress through `$ ip a` and check the used ports for example by looking up the sshd_config (usually at `$ sudo cat /etc/ssh/sshd_config`) Finally we have to fill out *Username* and *Password*. With this the program refers to the login data of the current logged in user of the RHEL OS. 
 
 >Especially the current user needs a password. If no password is set the installation process can not be performed.
+
+![Step 5](images/Screenshot%20from%202023-11-21%2013-23-29.png)
 
 After this the installation process should run through and install Swarm Learning into the folder specified in step 5.
