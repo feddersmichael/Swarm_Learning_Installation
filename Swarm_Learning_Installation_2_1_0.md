@@ -156,9 +156,9 @@ TODO: change picture size and name
 
 
 
-2. We can access the software under *get-license*. We choose the version under the category *Free Software*. ![APLS_search](images/Screenshot%20from%202023-11-20%2017-06-34.png)
+2. We can access the software under *get-license*. We choose the version under the category *Free Software*. ![APLS_search](images/APLS_search.png)
 
-3. We have to agree to the license and can select all files to donload. ![APLS-download](images/Screenshot%20from%202023-11-20%2017-06-12.png)
+3. We have to agree to the license and can select all files to donload. ![APLS_download](images/APLS_download.png)
 
 2. After downloading the zip files the installation steps are described in the document [HPE AutoPass License Server User Guide.pdf](pdf/HPE%20AutoPass%20License%20Server%20User%20Guide.pdf) under the section *Installation and Setup* (local version from 21.11.23, newest version is part of the downloaded documents zip file). This involves mainly executing the UNIX/setup.bin file in a standard installation procedure.
 
@@ -179,11 +179,13 @@ The following steps can also be found in the [HPE AutoPass License Server User G
 2. We can then log in the first time by using the default combination of
     - **User name**: admin
     - **password**: password  
-    The system will then ask to create a new user password combination which can be chosen freely.
+    The system will then ask to create a new user password combination which can be chosen freely.  
+    
+    ![Log_In_Window](images/Log_In_Window.png)
 
 > It is very important to take care of the password credentials *especially* if APLS is installed as a Docker Container. If they get lost and you installed APLS as a software uninstalling should reset everything **which includes assigned licenses**. If APLS was installed as a Container **I didn't find a way to reset the username/password** so it is very advised to act cautiously.
 
-3. Under the tab *License Management* and the subtab *Install License* we find the **Lock Code**. ![Lock Code](images/Screenshot%20from%202023-11-21%2012-37-27.png)
+3. Under the tab *License Management* and the subtab *Install License* we find the **Lock Code**. ![Lock_Code](images/Lock_Code.png)
 
 ## Download SLM-UI
 
@@ -191,11 +193,11 @@ The following steps can also be found in the [HPE AutoPass License Server User G
 
 Now we can retrieve Swarm Learning from the HPE Software Center.
 
-1. We access the [HPE Software page](https://myenterpriselicense.hpe.com/cwp-ui/software) and search for *Swarm Learning*. ![Swarm Learning Search](images/Screenshot%20from%202023-11-21%2012-53-02.png) Here we need to select the option *Get License*.
+1. We access the [HPE Software page](https://myenterpriselicense.hpe.com/cwp-ui/software) and search for *Swarm Learning*. ![Swarm_Learning_Search](images/Swarm_Learning_Search.png) Here we need to select the option *Get License*.
 
-2. In the next step we need to activate our License. *HPE Serial Number* refers to the Lock Code we looked up in the previous step. ![Activate Swarm Learning](images/Screenshot%20from%202023-11-21%2012-56-45.png)
+2. In the next step we need to activate our License. *HPE Serial Number* refers to the Lock Code we looked up in the previous step. ![Activate_Swarm_Learning](images/Activate_Swarm_Learning.png)
 
-3. Finally after accepting the license we can download Swarm Learning. For our purposes we don't need the installation for Windows or Mac. ![Download Swarm Learning](images/Screenshot%20from%202023-11-21%2013-03-25.png)
+3. Finally after accepting the license we can download Swarm Learning. For our purposes we don't need the installation for Windows or Mac. ![Download_Swarm_Learning](images/Download_Swarm_Learning.png)
 
 ## Install swarm learning on the host with the SLM-UI
 
@@ -205,11 +207,11 @@ Now we need to install the licenses for Swarm Learning.
 
 1. We access the [APLS Web-Ui](https://localhost:5814/autopass)
 
-2. We navigate to *License Management* and then *Install Liceense*. ![Navigate Install License](images/Screenshot%20from%202023-11-21%2013-15-21.png)
+2. We navigate to *License Management* and then *Install Liceense*. ![Navigate_Install_License](images/Navigate_Install_License.png)
 
 3. Here we need to select the license file which we just downloaded at step 3. [here](#download-slm-ui) which has a .dat file type.
 
-4. Select all possible products and continue with *Install Licenses*. ![Install Licenses](images/Screenshot%20from%202023-11-21%2013-17-54.png)
+4. Select all possible products and continue with *Install Licenses*. ![Install_Licenses](images/Install_Licenses.png)
 
 You should get a green message containing *License(s) added successfully*.
 
@@ -221,12 +223,12 @@ Afterwards we can install the SLM-UI.
 
 >Don't forget to check *Allow executing file as a program* under *Permissions* at the file properties.
 
-2. The first two steps repeat the introuction and Hardware Requirements. At step 3 we need to fill in the *HPE Passport Username* which is the E-Mail we used to sign up for HPE Software Center. ![Step 3](images/Screenshot%20from%202023-11-21%2013-23-29.png)
+2. The first two steps repeat the introuction and Hardware Requirements. At step 3 we need to fill in the *HPE Passport Username* which is the E-Mail we used to sign up for HPE Software Center. ![Step_3](images/Step_3.png)
 
 3. If we use the standard Database Settings the next relevant step for us is step 5 *Install SLM-UI*. As this is the first installation we don't need to check the *Upgrade* button. We can find our ip adress through `$ ip a` and check the used ports for example by looking up the sshd_config (usually at `$ sudo cat /etc/ssh/sshd_config`) Finally we have to fill out *Username* and *Password*. With this the program refers to the login data of the current logged in user of the RHEL OS. 
 
 >Especially the current user needs a password. If no password is set the installation process can not be performed.
 
-![Step 5](images/Screenshot%20from%202023-11-21%2013-23-29.png)
+![Step_5](images/Step_5.png)
 
 After this the installation process should run through and install Swarm Learning into the folder specified in step 5.
